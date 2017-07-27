@@ -1,0 +1,40 @@
+#进程和多线程
+ 进程是操作系统结构的基础；是一次程序的执行；是一个程序及一个结构在处理机上顺序执行时所发生的活动；
+    是程序在一个数据集合上运行的过程，他是系统进行资源分配和调度的一个独立单位。
+ 可以将一个正在操作系统上运行的exe理解成一个“进程”，而线程可以理解成在进程中独立运行的子任务。
+#继承Thread类
+ 使用多线程，代码的运行结果与代码执行顺序或调用顺序无关
+ 线程具有随机性，随机被执行的线程，使用随机数的形式是线程得到挂起的效果，从而表现出CPU执行哪个线程具有不确定性
+ 线程启动顺序与start()执行顺序无关
+#实现Runnable接口
+ 继承thread类只能实现单继承，不能实现多继承，而使用runnable可以解决这个问题
+#Synchronized 使用同步方法
+ synchronized可以在任意对象及方法上加锁，而加锁的这段代码称为“互斥区”或“临界区”
+#非线程安全
+ 非线程安全主要是指多个线程对同一个对象的同一个实例变量进行操作时会出现值被更改、值不同步的情况，从而影响程序的执行流程
+#currentThread()方法
+ 可以返回代码段正在被哪个线程调用的信息eg:Thread.currentThread().getName();Thread.getName();
+#isAlive()方法
+ 判断当前的线程是否处于活动状态（活动状态：线程已经启动活尚未终止）
+#sleep()方法
+ sleep()的作用是在指定的毫秒数内让当前“正在执行的线程”休眠（暂停执行）。“正在执行的毫秒数”是指this.currentThread()返回的线程
+#getId()方法
+ getId()方法取得线程的唯一标识
+#停止线程
+ 1)使用退出标志，使线程正常退出，也就是当run方法完成后线程终止
+ 2)使用stop方法强行终止线程，但是不推荐使用这个方法，因为stop和suspend及resume一样，都是作废过期的方法，使用它们可能产生不可预料的结果
+ 3)使用interrupt方法中断线程
+ $判断线程是否是停止状态
+ 1)this.interrupted() 测试当前线程是否已经中断
+ 2)this.isInterrupted() 测试线程是否已经中断
+eg:在沉睡中停止
+    try {
+        Thread.sleep(500);
+    } catch (InterruptedException e) {
+        System.out.println("先停止，再遇到了sleep，进入catch");
+        e.printStackTrace();
+    }
+ $suspend与resume方法，暂停与恢复
+ $suspend与resume方法的缺点————独占
+ $suspend与resume方法的缺点————不同步
+
